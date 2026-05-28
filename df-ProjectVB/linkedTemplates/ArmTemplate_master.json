@@ -1,0 +1,105 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "df-ProjectVB"
+		},
+		"ls_datalake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_datalake'"
+		},
+		"ls_sqlDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sqlDB'"
+		},
+		"ls_REST_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://pokeapi.co/api/v2/pokemon"
+		},
+		"ls_datalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageadfvb.dfs.core.windows.net/"
+		},
+		"ls_sqlDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserver--vb.database.windows.net"
+		},
+		"ls_sqlDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlDB"
+		},
+		"ls_sqlDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "VBadmin"
+		},
+		"schedule_properties_Scheduled_parameters_schema": {
+			"type": "string",
+			"defaultValue": "Source"
+		},
+		"schedule_properties_Scheduled_parameters_table": {
+			"type": "string",
+			"defaultValue": "Orders"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "df-ProjectVB_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_datalake_accountKey": {
+						"value": "[parameters('ls_datalake_accountKey')]"
+					},
+					"ls_sqlDB_password": {
+						"value": "[parameters('ls_sqlDB_password')]"
+					},
+					"ls_REST_properties_typeProperties_url": {
+						"value": "[parameters('ls_REST_properties_typeProperties_url')]"
+					},
+					"ls_datalake_properties_typeProperties_url": {
+						"value": "[parameters('ls_datalake_properties_typeProperties_url')]"
+					},
+					"ls_sqlDB_properties_typeProperties_server": {
+						"value": "[parameters('ls_sqlDB_properties_typeProperties_server')]"
+					},
+					"ls_sqlDB_properties_typeProperties_database": {
+						"value": "[parameters('ls_sqlDB_properties_typeProperties_database')]"
+					},
+					"ls_sqlDB_properties_typeProperties_userName": {
+						"value": "[parameters('ls_sqlDB_properties_typeProperties_userName')]"
+					},
+					"schedule_properties_Scheduled_parameters_schema": {
+						"value": "[parameters('schedule_properties_Scheduled_parameters_schema')]"
+					},
+					"schedule_properties_Scheduled_parameters_table": {
+						"value": "[parameters('schedule_properties_Scheduled_parameters_table')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
