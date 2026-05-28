@@ -64,7 +64,7 @@
 				"     vacuum: 0,",
 				"     deletable: false,",
 				"     insertable: false,",
-				"     updateable: true,",
+				"     updateable: false,",
 				"     upsertable: true,",
 				"     keys:['location_id'],",
 				"     umask: 0022,",
