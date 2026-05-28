@@ -1,0 +1,15 @@
+{
+	"name": "df-ProjectVB",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b08e7f97-6c59-4a46-86ab-192b2023dba2",
+		"tenantId": "5f0c202a-a440-40aa-a79f-3a2076da8b22"
+	}
+}
