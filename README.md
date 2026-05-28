@@ -180,8 +180,6 @@ Updated Script expression:
 
 This way, if I know the pipeline failed from `2026-01-01`, I can trigger a run with `backdate = '2026-01-01'` and it will only reload data from that date onward — not everything from 1900.
 
-> ⚠️ **Note:** The `cdc.json` key is `last_load_date` throughout. I noticed I had used `cdc_timestamp` in some of my rough notes — that was a naming inconsistency. Always use `last_load_date` to match what's actually stored in the JSON file.
-
 ---
 
 ## 3. Scheduled Pipeline + Logic App Alerting
@@ -433,14 +431,8 @@ Every pipeline, linked service, dataset, trigger, and data flow is stored as a J
 
 ---
 
-## 9. Corrections & Things I Learned
+## 9. concepts
 
-A few things I got wrong in my initial notes that are worth calling out:
-
-**CDC key naming inconsistency:** In the `cdc.json` file I created, the key is `last_load_date`. But in the backdate refresh section I accidentally wrote `cdc_timestamp` in the expression. The correct key to reference everywhere is `last_load_date` — matching what's actually in the file:
-```
-activity('last_cdc').output.value[0].last_load_date
-```
 
 **Bulk load vs Backdate Refresh:** Bulk load (reloading everything from scratch) is expensive and slow. Backdate Refresh is the right answer when a pipeline fails silently for a period — pass in the date from which you want to reload and the pipeline will catch up only from that point.
 
